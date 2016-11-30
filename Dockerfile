@@ -2,6 +2,7 @@ FROM ruby:2.3
 
 RUN apt-get update -qq && \
   apt-get -yq install \
+  imagemagick \
   nodejs && \
   rm -rf /var/lib/apt/lists/*
 
