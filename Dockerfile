@@ -1,18 +1,19 @@
 FROM ruby:2.3
 
-RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get -yq install \
+RUN apt-get update -qq && \
+  apt-get -yq install \
   nodejs && \
   rm -rf /var/lib/apt/lists/*
 
+ENV APP_ROOT /srv
 ENV GEM_HOME /var/cache/bundle_cache
 ENV BUNDLE_PATH /var/cache/bundle_cache
 
 EXPOSE 3000
-VOLUME /srv
+VOLUME $APP_ROOT
 
 COPY start-rails.sh /
 
-WORKDIR /srv
+WORKDIR $APP_ROOT
 
 CMD /start-rails.sh

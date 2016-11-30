@@ -1,1 +1,9 @@
-bundle check || bundle install && rm -f tmp/pids/server.pid && bin/rails server --port 3000 --binding 0.0.0.0
+#!/bin/bash
+
+bundle check || bundle install
+
+if [ -f tmp/pids/server.pid ]; then
+  rm -f tmp/pids/server.pid
+fi
+
+bundle exec rails s -p 3000 -b 0.0.0.0
