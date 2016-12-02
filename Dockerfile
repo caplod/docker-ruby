@@ -11,7 +11,10 @@ ENV APP_ROOT /srv
 ENV GEM_HOME /var/cache/bundle_cache
 ENV BUNDLE_PATH /var/cache/bundle_cache
 
+RUN chmod a+w $APP_ROOT
+
 EXPOSE 3000
+
 VOLUME $APP_ROOT
 
 COPY start-rails.sh /
