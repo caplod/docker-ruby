@@ -6,6 +6,8 @@ RUN apt-get update -qq && \
   nodejs && \
   rm -rf /var/lib/apt/lists/*
 
+RUN echo 'install: --no-document\nupdate: --no-document' > "$HOME/.gemrc"
+
 ENV LANG C.UTF-8
 ENV APP_ROOT /srv
 ENV GEM_HOME /var/cache/bundle_cache
