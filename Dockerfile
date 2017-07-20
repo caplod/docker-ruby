@@ -1,17 +1,19 @@
 FROM ruby:2.3
 
-RUN apt-get update -qq && \
-  apt-get -yq install \
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt-get update && \
+  apt-get install -qq -y \
+  build-essential \
   imagemagick \
-  nodejs && \
+  nodejs \
+  yarn \
+  --fix-missing --no-install-recommends && \
   rm -rf /var/lib/apt/lists/*
-
-RUN echo 'install: --no-document\nupdate: --no-document' > "$HOME/.gemrc"
 
 ENV LANG C.UTF-8
 ENV APP_ROOT /srv
-ENV GEM_HOME /var/cache/bundle_cache
-ENV BUNDLE_PATH /var/cache/bundle_cache
 
 RUN chmod a+w $APP_ROOT
 
@@ -19,8 +21,6 @@ EXPOSE 3000
 
 VOLUME $APP_ROOT
 
-COPY start-rails.sh /
-
 WORKDIR $APP_ROOT
 
-CMD /start-rails.sh
+CMD [ "/bin/bash" ]
