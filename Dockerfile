@@ -7,6 +7,8 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
   apt-get install -qq -y \
   build-essential \
   imagemagick \
+  postgresql-client \
+  mysql-client \
   nodejs \
   yarn \
   --fix-missing --no-install-recommends && \
